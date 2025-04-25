@@ -8,6 +8,8 @@ load_dotenv()
 
 gemini_api_key = os.getenv("GEMINI_API_KEY")
 
+
+
 # Check if the API key is present; if not, raise an error
 if not gemini_api_key:
     raise ValueError("GEMINI_API_KEY is not set. Please ensure it is defined in your .env file.")
@@ -31,7 +33,10 @@ config = RunConfig(
 
 agent: Agent = Agent(name="Assistant", instructions="You are a helpful assistant", model=model)
 
-result = Runner.run_sync(agent, "Hello, what is your model name", run_config=config)
+result = Runner.run_sync(agent, "Write a short poem about agentic architechure ad also add names of frameworks that can be used for it", run_config=config)
 
 print("\nCALLING AGENT\n")
 print(result.final_output)
+# Save the result to a file
+with open("result..md", "w") as f:
+    f.write(result.final_output)
